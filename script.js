@@ -21,25 +21,41 @@ function includeHTML() {
 window.onload = includeHTML;
 
 
-document.getElementById('jobForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // Prevent form submission
-    
-    const formData = new FormData(this);
-    const data = {};
-    
-    formData.forEach((value, key) => data[key] = value);
-    
-    fetch('https://hook.integromat.com/your-webhook-url', {
+// Submit function to MAKE.com
+document.getElementById('job-posting-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission behavior
+
+    // Capture the form data
+    const jobData = {
+        posterName: document.getElementById('poster-name').value,
+        title: document.getElementById('title').value,
+        description: document.getElementById('description').value,
+        skills: document.getElementById('skills').value,
+        company: document.getElementById('company').value,
+        dealType: document.getElementById('deal-type').value,
+        datePosted: new Date().toISOString(), // Capture the current date
+        uniqueId: generateUniqueId(), // Generate a unique ID for each post
+    };
+
+    // Send the data to Make.com webhook
+    fetch('https://hook.eu2.make.com/gh15bg69yv59ppljzyi4w92wn26a7r6v', {
         method: 'POST',
-        body: JSON.stringify(data),
         headers: {
-            'Content-Type': 'application/json'
-        }
-    }).then(response => {
-        if (response.ok) {
-            alert("Job Posted Successfully!");
-        } else {
-            alert("Error Posting Job.");
-        }
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(jobData),
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('Job posted successfully!');
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
     });
 });
+
+// Function to generate a unique ID for each job post
+function generateUniqueId() {
+    return 'job_' + Math.random().toString(36).substr(2, 9);
+}
