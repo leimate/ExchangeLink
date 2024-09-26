@@ -1,0 +1,130 @@
+html {
+    height: 100%;
+}
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+.header-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(212, 9, 43);
+    color: white;
+    padding: 20px;
+}
+
+.header-nav ul li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 20px;
+}
+
+.header-nav ul li a{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.header-nav ul li a:hover {
+    color:rgb(44, 46, 41);
+    transition: 0.3s;
+}
+
+main {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.cta-button {
+    display: inline-block; 
+    background: #d86eaf;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.cta-button:hover {
+    background: #4cae4c;
+}
+
+footer {
+    margin-top: auto;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.footer-nav {
+    margin-top: 10px;
+}
+
+.footer-nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Center the links */
+}
+
+.footer-nav li {
+    margin: 0 15px; /* Spacing between links */
+}
+
+.footer-nav li a {
+    font-size: 15px; 
+    color: white; /* Link color */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-nav li a:hover {
+    color: #d86eaf; /* Change color on hover */
+}
+
+footer h2, footer p {
+    margin: 0;
+}
+
+.form-group {
+    margin-bottom: 15px; /* Space between form fields */
+}
+
+.form-group label {
+    display: block; /* Makes the label occupy full width */
+    margin-bottom: 5px; /* Space between label and input */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+    width: calc(100% - 20px); /* Full width minus padding */
+    padding: 10px; /* Padding inside the input */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+    box-sizing: border-box; /* Includes padding in width */
+}
+
+textarea {
+    resize: vertical; /* Allows vertical resizing of textarea */
+    min-height: 100px; /* Minimum height for the textarea */
+}
+
+.required {
+    color: red; /* Color for the asterisk */
+    margin-left: 5px; /* Space between label and asterisk */
+}
+
+.required-label {
+    color: red; /* Color for the 'Required *' text */
+    margin-bottom: 5px; /* Space below the label */
+    font-weight: bold; /* Bold text for emphasis */
+}
+
