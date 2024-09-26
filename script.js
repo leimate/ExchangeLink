@@ -19,3 +19,27 @@ function includeHTML() {
 
 // Call function to include the header and footer
 window.onload = includeHTML;
+
+
+document.getElementById('jobForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent form submission
+    
+    const formData = new FormData(this);
+    const data = {};
+    
+    formData.forEach((value, key) => data[key] = value);
+    
+    fetch('https://hook.integromat.com/your-webhook-url', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            alert("Job Posted Successfully!");
+        } else {
+            alert("Error Posting Job.");
+        }
+    });
+});
