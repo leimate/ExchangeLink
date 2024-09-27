@@ -28,21 +28,15 @@ document.getElementById('jobForm').addEventListener('submit', function(event) {
     .then(response => {
         console.log("Response status:", response.status); // Debugging response status
 
-        // Check if the content type is JSON before parsing
-        const contentType = response.headers.get("content-type");
-        if (contentType && contentType.includes("application/json")) {
-            return response.json();
-        } else {
-            console.warn("Response is not JSON:", contentType);
-            return response.text(); // Fall back to text if not JSON
-        }
+        // If the response is plain text (e.g., "Accepted"), return it as text
+        return response.text(); // Treat response as plain text
     })
     .then(data => {
         console.log("Success data:", data); // Debugging success data
-        alert('Job posted successfully!');
+        alert('Job posted successfully!'); // Show success message
     })
     .catch((error) => {
-        console.error('Error:', error); // More detailed error logging
+        console.error('Error:', error); // Log the error
         alert('There was an error posting the job.');
     });
 });
