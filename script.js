@@ -22,19 +22,21 @@ window.onload = includeHTML;
 
 
 // Submit function to MAKE.com
-document.getElementById('job-posting-form').addEventListener('submit', function(event) {
+// Submit function to MAKE.com
+document.getElementById('jobForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent default form submission behavior
 
     // Capture the form data
     const jobData = {
-        posterName: document.getElementById('poster-name').value,
+        posterName: document.getElementById('name').value,
         title: document.getElementById('title').value,
         description: document.getElementById('description').value,
         skills: document.getElementById('skills').value,
         company: document.getElementById('company').value,
-        dealType: document.getElementById('deal-type').value,
+        dealType: document.getElementById('deal').value,
         datePosted: new Date().toISOString(), // Capture the current date
         uniqueId: generateUniqueId(), // Generate a unique ID for each post
+        contactInfo: document.getElementById('contact').value, // Capture contact information
     };
 
     // Send the data to Make.com webhook
@@ -45,13 +47,19 @@ document.getElementById('job-posting-form').addEventListener('submit', function(
         },
         body: JSON.stringify(jobData),
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
     .then(data => {
         alert('Job posted successfully!');
         console.log('Success:', data);
     })
     .catch((error) => {
         console.error('Error:', error);
+        alert('There was an error posting the job.');
     });
 });
 
