@@ -1,5 +1,5 @@
 // Submit function to MAKE.com
-document.getElementById('job-posting-form').addEventListener('submit', function(event) {
+document.getElementById('jobForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent default form submission behavior
 
     // Capture the form data
@@ -19,6 +19,8 @@ document.getElementById('job-posting-form').addEventListener('submit', function(
         uniqueId: generateUniqueId(), // Generate a unique ID for each post
     };
 
+    console.log("Submitting job data:", jobData); // Debugging
+
     // Send the data to Make.com webhook
     fetch('https://hook.eu2.make.com/gh15bg69yv59ppljzyi4w92wn26a7r6v', {
         method: 'POST',
@@ -28,17 +30,18 @@ document.getElementById('job-posting-form').addEventListener('submit', function(
         body: JSON.stringify(jobData),
     })
     .then(response => {
-        if (response.ok) {
-            return response.text(); // Parse response as plain text if not JSON
-        }
-        throw new Error('Error in posting job');
+        console.log("Response status:", response.status); // Debugging response status
+
+        // If the response is plain text (e.g., "Accepted"), return it as text
+        return response.text(); // Treat response as plain text
     })
     .then(data => {
-        alert('Job posted successfully!');
-        console.log('Success:', data);
+        console.log("Success data:", data); // Debugging success data
+        alert('Job posted successfully!'); // Show success message
     })
     .catch((error) => {
-        console.error('Error:', error);
+        console.error('Error:', error); // Log the error
+        alert('There was an error posting the job.');
     });
 });
 
