@@ -91,7 +91,7 @@ function displayJobPostings(data) {
         jobElement.classList.add('job-post');
 
         jobElement.innerHTML = `
-            <h3>${job.title}</h3>
+            <h3><a href="job-details.html?uniqueId=${job.uniqueId}">${job.title}</a></h3>
             <p><strong>Posted by:</strong> ${job.posterName}</p>
             <p><strong>Description:</strong> ${job.description}</p>
             <p><strong>Skills:</strong> ${job.skills}</p>
@@ -112,5 +112,5 @@ function displayJobPostings(data) {
 // Fetch job postings on page load
 window.onload = () => {
     includeHTML();
-    fetchJobPostings();
+    fetchJobPostings(); // Fetch all job postings
 };
