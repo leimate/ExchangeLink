@@ -49,17 +49,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     // Function to get local date and time in a formatted string
     function getLocalDateTime() {
-    const now = new Date();
-    const options = {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        timeZoneName: 'short'
-    };
-
-        return now.toLocaleString('en-US', options);
+        return new Date().toLocaleString('en-PH', { timeZone: 'Asia/Manila' });
     }
 });
