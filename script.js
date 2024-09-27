@@ -1,27 +1,3 @@
-// Function to include external HTML into div placeholders
-function includeHTML() {
-    const header = document.getElementById('header-container');
-    const footer = document.getElementById('footer-container');
-
-    // Load header.html
-    fetch('header.html')
-        .then(response => response.text())
-        .then(data => header.innerHTML = data)
-        .catch(err => console.log('Error loading header:', err));
-
-    // Load footer.html
-    fetch('footer.html')
-        .then(response => response.text())
-        .then(data => footer.innerHTML = data)
-        .catch(err => console.log('Error loading footer:', err));
-    
-}
-
-// Call function to include the header and footer
-window.onload = includeHTML;
-
-
-// Submit function to MAKE.com
 // Submit function to MAKE.com
 document.getElementById('jobForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent default form submission behavior
@@ -39,6 +15,8 @@ document.getElementById('jobForm').addEventListener('submit', function(event) {
         contactInfo: document.getElementById('contact').value, // Capture contact information
     };
 
+    console.log("Submitting job data:", jobData); // Debugging
+
     // Send the data to Make.com webhook
     fetch('https://hook.eu2.make.com/gh15bg69yv59ppljzyi4w92wn26a7r6v', {
         method: 'POST',
@@ -48,17 +26,23 @@ document.getElementById('jobForm').addEventListener('submit', function(event) {
         body: JSON.stringify(jobData),
     })
     .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+        console.log("Response status:", response.status); // Debugging response status
+
+        // Check if the content type is JSON before parsing
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+            return response.json();
+        } else {
+            console.warn("Response is not JSON:", contentType);
+            return response.text(); // Fall back to text if not JSON
         }
-        return response.json();
     })
     .then(data => {
+        console.log("Success data:", data); // Debugging success data
         alert('Job posted successfully!');
-        console.log('Success:', data);
     })
     .catch((error) => {
-        console.error('Error:', error);
+        console.error('Error:', error); // More detailed error logging
         alert('There was an error posting the job.');
     });
 });
