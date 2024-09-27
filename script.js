@@ -61,4 +61,5 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
         return now.toLocaleString('en-US', options);
+    }
 });
