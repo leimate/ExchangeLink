@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
             compensation: document.getElementById('compensation').value,
             deadline: document.getElementById('deadline').value,
             contact: document.getElementById('contact').value,
-            datePosted: new Date().toISOString(), // Capture the current date
+            datePosted: getLocalDateTime(), // Capture the local date and tim
             uniqueId: generateUniqueId(), // Generate a unique ID for each post
         };
 
