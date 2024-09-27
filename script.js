@@ -74,4 +74,43 @@ document.addEventListener('DOMContentLoaded', function() {
     function getLocalDateTime() {
         return new Date().toLocaleString('en-PH', { timeZone: 'Asia/Manila' });
     }
+
+
+    
 });
+
+    //Update Job Listings job-listing.html
+
+// Function to display job postings
+function displayJobPostings(data) {
+    const jobPostsContainer = document.getElementById('job-posts');
+    jobPostsContainer.innerHTML = ''; // Clear previous postings
+
+    data.forEach(job => {
+        const jobElement = document.createElement('div');
+        jobElement.classList.add('job-post');
+
+        jobElement.innerHTML = `
+            <h3>${job.title}</h3>
+            <p><strong>Posted by:</strong> ${job.posterName}</p>
+            <p><strong>Description:</strong> ${job.description}</p>
+            <p><strong>Skills:</strong> ${job.skills}</p>
+            <p><strong>Company:</strong> ${job.company || 'N/A'}</p>
+            <p><strong>Deal Type:</strong> ${job.dealType}</p>
+            <p><strong>Location:</strong> ${job.location || 'N/A'}</p>
+            <p><strong>Duration:</strong> ${job.duration || 'N/A'}</p>
+            <p><strong>Compensation:</strong> ${job.compensation || 'N/A'}</p>
+            <p><strong>Application Deadline:</strong> ${job.deadline || 'N/A'}</p>
+            <p><strong>Contact:</strong> ${job.contact}</p>
+            <p><strong>Date Posted:</strong> ${job.datePosted}</p>
+        `;
+
+        jobPostsContainer.appendChild(jobElement);
+    });
+}
+
+// Fetch job postings on page load
+window.onload = () => {
+    includeHTML();
+    fetchJobPostings();
+};
