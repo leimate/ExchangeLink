@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         // Send the data to Make.com webhook
-        fetch('https://hook.eu2.make.com/gh15bg69yv59ppljzyi4w92wn26a7r6v', {
+        fetch('https://hook.eu2.make.com/2brlbaz7km9sstx2smz58uglgm870zke', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
